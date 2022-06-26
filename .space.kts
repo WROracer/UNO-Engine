@@ -11,7 +11,7 @@ job("Build, run tests, publish") {
                 mvn deploy -s settings.xml \
                     -DrepositoryUrl=${'$'}REPOSITORY_URL \
                     -DspaceUsername=${'$'}JB_SPACE_CLIENT_ID \
-                    -DspacePassword=${'$'}JB_SPACE_CLIENT_SECRET
+                    -DspacePassword=${'$'}JB_SPACE_CLIENT_TOKEN
             """
         }
     }
