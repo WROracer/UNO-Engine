@@ -18,7 +18,7 @@
             <id>space-maven</id>
             <!-- provide url via the 'repositoryUrl' command-line arg -->
             <!--suppress UnresolvedMavenProperty -->
-            <url>${repositoryUrl}</url>
+            <url>https://maven.pkg.jetbrains.space/wroracer/p/uno/maven</url>
         </repository>
     </distributionManagement>
     
