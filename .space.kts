@@ -35,6 +35,8 @@ job("Build, run tests, publish") {
 job("TEST"){
     container(displayName = "Change minor version", image = "amazoncorretto:17-alpine") {
         kotlinScript { api ->
+            println("Env: "+System.getenv("engine.version.patch"))
+            println("Prop: "+System.getProperty("engine.version.patch"))
             if (System.getProperty("engine.version.patch") == null) {
                 System.setProperty("engine.version.patch","0")
                 println("Set engine.version.patch to 0")
