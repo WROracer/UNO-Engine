@@ -35,7 +35,7 @@ job("Build, run tests, publish") {
 job("TEST"){
     container(displayName = "Change minor version", image = "amazoncorretto:17-alpine") {
         kotlinScript { api ->
-            println(api.parameters.get("engine.version.minor"));
+            println(api.parameters["engine.version.minor"]);
         }
     }
 }
