@@ -35,12 +35,11 @@ job("Build, run tests, publish") {
 job("TEST"){
     container(displayName = "Change minor version", image = "amazoncorretto:17-alpine") {
         kotlinScript { api ->
-            if (api.parameters.get("engine.version.minor") == null) {
-                api.parameters["engine.version.minor"] = "0"
-                println("Set engine.version.minor to 0")
+            if (System.getProperty("engine.version.patch") == null) {
+                System.setProperty("engine.version.patch","0")
+                println("Set engine.version.patch to 0")
             }
-            println(api.parameters);
-            println(api.parameters["engine.version.minor"]);
+            println(System.getProperty("engine.version.patch"))
         }
     }
 }
