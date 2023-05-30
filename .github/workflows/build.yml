@@ -40,7 +40,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: jar
-          path: target/UNO*.jar
+          path: target/*.jar
   release:
     if: 'contains(github.event.head_commit.message, ''#'')'
     needs: build
