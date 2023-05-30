@@ -5,18 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.wroracer</groupId>
-    <artifactId>UNO-Engine</artifactId>
+    <artifactId>uno-engine</artifactId>
     <version>1.2.1</version>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>19</maven.compiler.source>
+        <maven.compiler.target>19</maven.compiler.target>
     </properties>
 
     <distributionManagement>
        <repository>
            <id>github</id>
-           <name>GitHub OWNER Apache Maven Packages</name>
            <url>https://maven.pkg.github.com/wroracer/uno-engine</url>
        </repository>
     </distributionManagement>
@@ -31,7 +30,6 @@
     </dependencies>
 
     <build>
-        <finalName>uno-engine</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
