@@ -14,12 +14,11 @@
     </properties>
 
     <distributionManagement>
-        <repository>
-            <id>space-maven</id>
-            <!-- provide url via the 'repositoryUrl' command-line arg -->
-            <!--suppress UnresolvedMavenProperty -->
-            <url>https://maven.pkg.jetbrains.space/wroracer/p/uno/maven</url>
-        </repository>
+       <repository>
+           <id>github</id>
+           <name>GitHub OWNER Apache Maven Packages</name>
+           <url>https://maven.pkg.github.com/wroracer/uno-engine</url>
+       </repository>
     </distributionManagement>
 
     <dependencies>
