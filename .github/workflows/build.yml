@@ -41,6 +41,12 @@ jobs:
         with:
           name: jar
           path: target/*.jar
+      - name: Report test coverage to DeepSource
+        uses: deepsourcelabs/test-coverage-action@master
+        with:
+          key: python
+          coverage-file: ./target/site/jacoco/jacoco.xml
+          dsn: ${{ secrets.DEEPSOURCE_DSN }}
   release:
     if: 'startsWith(github.event.head_commit.message, ''#'')'
     needs: build
