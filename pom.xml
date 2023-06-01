@@ -6,7 +6,7 @@
 
     <groupId>de.wroracer</groupId>
     <artifactId>uno-engine</artifactId>
-    <version>0.0.1-dev2</version>
+    <version>0.0.1-dev3</version>
 
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
