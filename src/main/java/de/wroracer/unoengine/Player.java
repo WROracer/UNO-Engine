@@ -1,28 +1,25 @@
 package de.wroracer.unoengine;
 
+import de.wroracer.unoengine.card.Card;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Player {
-    private UUID uuid;
-    private int id;
+    private List<Card> hand;
+    private UUID id;
+
     public Player(){
-        this.uuid = UUID.randomUUID();
+        id = UUID.randomUUID();
+        hand = new ArrayList<>();
     }
 
-    protected Player(int id){
-        this();
-        this.id = id;
+    public List<Card> getHand() {
+        return hand;
     }
 
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "uuid=" + uuid +
-                ", id=" + id +
-                '}';
+    public UUID getId() {
+        return id;
     }
 }
