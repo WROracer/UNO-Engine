@@ -1,6 +1,6 @@
-package de.wroracer.unoengine.card;
+package de.wroracer.uno.engine.card;
 
-import de.wroracer.unoengine.Game;
+import de.wroracer.uno.engine.Game;
 
 public class WildDrawFourCard extends WildCard implements Special {
     public WildDrawFourCard() {
@@ -8,7 +8,7 @@ public class WildDrawFourCard extends WildCard implements Special {
     }
 
     @Override
-    public void performAction(Game game) {
+    public void execute(Game game) {
         //TODO
     }
 }
