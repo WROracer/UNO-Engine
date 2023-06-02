@@ -1,6 +1,8 @@
 package de.wroracer.uno.engine.card;
 
 import de.wroracer.uno.engine.Game;
+import de.wroracer.uno.engine.Player;
+import de.wroracer.uno.engine.event.WildeDrawFourEvent;
 
 public class WildDrawFourCard extends WildCard implements Special {
     public WildDrawFourCard() {
@@ -8,8 +10,10 @@ public class WildDrawFourCard extends WildCard implements Special {
     }
 
     @Override
-    public void execute(Game game) {
-        game.draw(game.nextPlayer(), 4);
-        game.nextPlayer();
+    public WildeDrawFourEvent execute(Game game) {
+        Player drawer = game.nextPlayer();
+        game.draw(drawer, 4);
+        game.skipTurn();
+        return new WildeDrawFourEvent(game.nextPlayer(), drawer, color);
     }
 }

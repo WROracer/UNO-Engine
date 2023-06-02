@@ -1,6 +1,7 @@
 package de.wroracer.uno.engine.card;
 
 import de.wroracer.uno.engine.Game;
+import de.wroracer.uno.engine.event.SkipEvent;
 
 public class SkipCard extends Card implements Special {
     public SkipCard(Color color) {
@@ -8,7 +9,9 @@ public class SkipCard extends Card implements Special {
     }
 
     @Override
-    public void execute(Game game) {
-        game.nextPlayer();
+    public SkipEvent execute(Game game) {
+        game.skipTurn();
+
+        return new SkipEvent(game.nextPlayer());
     }
 }
