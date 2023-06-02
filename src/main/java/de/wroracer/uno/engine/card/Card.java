@@ -47,6 +47,14 @@ public class Card implements Comparable<Card> {
         return 0;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
     public enum Color {
         RED, GREEN, BLUE, YELLOW, BLACK;
 

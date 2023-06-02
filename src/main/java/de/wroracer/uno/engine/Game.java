@@ -4,8 +4,10 @@ import de.wroracer.uno.engine.card.Card;
 import de.wroracer.uno.engine.card.Deck;
 import de.wroracer.uno.engine.card.Special;
 import de.wroracer.uno.engine.error.CardNotPlayableError;
+import de.wroracer.uno.engine.event.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,6 +16,7 @@ public class Game {
     private final Deck deck;
     private final UUID id;
     private final List<Player> players;
+    private final HashMap<Class<? extends UnoEvent>, List<UnoEventListender<? extends UnoEvent>>> eventListender = new HashMap<>();
     private boolean clockwise = true;
     private State state;
     private Player currentTurn;
@@ -54,10 +57,14 @@ public class Game {
     public void play(Card card) {
         if (card.canPlayedOn(deck.currentCard())) {
             if (currentTurn.getHand().contains(card)) {
+                if (card.getType() == Card.Type.WILDE) {
+                    triggerEvent(new WildeEvent(nextPlayer(), card.getColor()));
+                }
                 deck.discard(card);
                 currentTurn.getHand().remove(card);
                 if (card instanceof Special) {
-                    ((Special) card).execute(this);
+                    UnoEvent event = ((Special) card).execute(this);
+                    triggerEvent(event);
                 }
                 nextTurn();
             }
@@ -66,12 +73,11 @@ public class Game {
         }
     }
 
-    private void nextTurn() {
-        if (currentTurn.getHand().size() == 0) {
-            state = State.FINISHED;
-            return;
+    private void triggerEvent(UnoEvent event) {
+        List<UnoEventListender<? extends UnoEvent>> listenders = eventListender.get(event.getClass());
+        for (UnoEventListender<? extends UnoEvent> listender : listenders) {
+            ((UnoEventListender<UnoEvent>) listender).on(event);
         }
-        currentTurn = nextPlayer();
     }
 
     public Player nextPlayer() {
@@ -90,12 +96,25 @@ public class Game {
         return players.get(index);
     }
 
+    private void nextTurn() {
+        if (currentTurn.getHand().size() == 0) {
+            state = State.FINISHED;
+            triggerEvent(new FinishEvent(currentTurn));
+            return;
+        }
+        if (currentTurn.getHand().size() == 1) {
+            triggerEvent(new OneCardEvent(currentTurn));
+        }
+        currentTurn = nextPlayer();
+    }
+
     public void skipTurn() {
         currentTurn = nextPlayer();
     }
 
-    public void reverse() {
+    public boolean reverse() {
         clockwise = !clockwise;
+        return clockwise;
     }
 
     public boolean canBePlay(Card card) {
@@ -125,6 +144,42 @@ public class Game {
 
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public void addSkipListender(UnoEventListender<SkipEvent> listender) {
+        addListender(listender, SkipEvent.class);
+    }
+
+    public <T extends UnoEvent> void addListender(UnoEventListender<T> listender, Class<T> tClass) {
+        List<UnoEventListender<? extends UnoEvent>> list = eventListender.get(tClass);
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        list.add(listender);
+    }
+
+    public void addDrawTwoListender(UnoEventListender<DrawTwoEvent> listender) {
+        addListender(listender, DrawTwoEvent.class);
+    }
+
+    public void addReverseListender(UnoEventListender<ReverseEvent> listender) {
+        addListender(listender, ReverseEvent.class);
+    }
+
+    public void addWildeListender(UnoEventListender<WildeEvent> listender) {
+        addListender(listender, WildeEvent.class);
+    }
+
+    public void addWildeDrawFourListender(UnoEventListender<WildeDrawFourEvent> listender) {
+        addListender(listender, WildeDrawFourEvent.class);
+    }
+
+    public void addOneCardListender(UnoEventListender<OneCardEvent> listender) {
+        addListender(listender, OneCardEvent.class);
+    }
+
+    public void addFinishListender(UnoEventListender<FinishEvent> listender) {
+        addListender(listender, FinishEvent.class);
     }
 
 

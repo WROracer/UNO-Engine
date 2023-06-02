@@ -1,9 +1,10 @@
 package de.wroracer.uno.engine.card;
 
 import de.wroracer.uno.engine.Game;
+import de.wroracer.uno.engine.event.UnoEvent;
 
 public interface Special {
 
-    void execute(Game game);
+    UnoEvent execute(Game game);
 
 }
