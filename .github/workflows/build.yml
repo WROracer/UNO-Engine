@@ -161,7 +161,7 @@ jobs:
           prerelease: true
           title: Development Build
           files: |
-            **/MinecraftEmergency-*.jar
+            **/*.jar
             README.md
   mvnRelease:
     needs: release
