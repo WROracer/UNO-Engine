@@ -1,9 +1,9 @@
-package de.wroracer.unoengine.card;
+package de.wroracer.uno.engine.card;
 
 import org.junit.jupiter.api.Test;
 
-import static de.wroracer.unoengine.card.Card.Color.*;
-import static de.wroracer.unoengine.card.Card.Type.*;
+import static de.wroracer.uno.engine.card.Card.Color.*;
+import static de.wroracer.uno.engine.card.Card.Type.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

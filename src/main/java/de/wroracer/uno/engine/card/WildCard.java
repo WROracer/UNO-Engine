@@ -1,4 +1,4 @@
-package de.wroracer.unoengine.card;
+package de.wroracer.uno.engine.card;
 
 public class WildCard extends Card {
     public WildCard() {
