@@ -9,6 +9,7 @@ public class DrawTwoCard extends Card implements Special {
 
     @Override
     public void execute(Game game) {
-        //TODO
+        game.draw(game.nextPlayer(), 2);
+        game.nextPlayer();
     }
 }

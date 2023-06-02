@@ -12,6 +12,14 @@ public class WildCard extends Card {
     }
 
     @Override
+    public boolean canPlayedOn(Card card) {
+        if (this.color == Color.BLACK) {
+            return false;
+        }
+        return super.canPlayedOn(card);
+    }
+
+    @Override
     public String toString() {
         if (color == Color.BLACK) {
             return type.toString();

@@ -34,4 +34,9 @@ class CardTest {
         assertFalse(ys.canPlayedOn(g1));
     }
 
+    @Test
+    void specialCard() {
+        //TODO Write Tests
+    }
+
 }
