@@ -1,6 +1,6 @@
 package de.wroracer.uno.engine.card;
 
-public class Card {
+public class Card implements Comparable<Card> {
     protected Color color;
     protected int number;
     protected Type type;
@@ -40,6 +40,11 @@ public class Card {
     @Override
     public String toString() {
         return color + type.name;
+    }
+
+    @Override
+    public int compareTo(Card o) {
+        return 0;
     }
 
     public enum Color {

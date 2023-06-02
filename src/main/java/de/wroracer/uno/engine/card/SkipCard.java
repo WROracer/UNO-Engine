@@ -9,6 +9,6 @@ public class SkipCard extends Card implements Special {
 
     @Override
     public void execute(Game game) {
-        //TODO
+        game.nextPlayer();
     }
 }

@@ -14,7 +14,7 @@ public class Game {
     private final Deck deck;
     private final UUID id;
     private final List<Player> players;
-    private final boolean clockwise = true;
+    private boolean clockwise = true;
     private State state;
     private Player currentTurn;
 
@@ -53,12 +53,14 @@ public class Game {
 
     public void play(Card card) {
         if (card.canPlayedOn(deck.currentCard())) {
-            deck.discard(card);
-            currentTurn.getHand().remove(card);
-            if (card instanceof Special) {
-                ((Special) card).execute(this);
+            if (currentTurn.getHand().contains(card)) {
+                deck.discard(card);
+                currentTurn.getHand().remove(card);
+                if (card instanceof Special) {
+                    ((Special) card).execute(this);
+                }
+                nextTurn();
             }
-            nextTurn();
         } else {
             throw new CardNotPlayableError(card, deck.currentCard());
         }
@@ -69,6 +71,10 @@ public class Game {
             state = State.FINISHED;
             return;
         }
+        currentTurn = nextPlayer();
+    }
+
+    public Player nextPlayer() {
         int index = players.indexOf(currentTurn);
         if (clockwise) {
             index++;
@@ -81,7 +87,15 @@ public class Game {
                 index = players.size() - 1;
             }
         }
-        currentTurn = players.get(index);
+        return players.get(index);
+    }
+
+    public void skipTurn() {
+        currentTurn = nextPlayer();
+    }
+
+    public void reverse() {
+        clockwise = !clockwise;
     }
 
     public boolean canBePlay(Card card) {
@@ -89,11 +103,15 @@ public class Game {
     }
 
     public void draw(Player player) {
+        draw(player, 1);
+    }
+
+    public void draw(Player player, int amount) {
+        for (int i = 0; i < amount; i++) {
+            player.getHand().add(deck.drawCard());
+        }
         if (player == currentTurn) {
-            player.getHand().add(deck.drawCard());
             nextTurn();
-        } else {
-            player.getHand().add(deck.drawCard());
         }
     }
 
@@ -108,6 +126,7 @@ public class Game {
     public List<Player> getPlayers() {
         return players;
     }
+
 
     public enum State {
         LOBBY,
