@@ -92,6 +92,9 @@ public class Deck {
     }
 
     public Card currentCard() {
+        if (discard.isEmpty()) {
+            return null;
+        }
         return discard.peek();
     }
 
