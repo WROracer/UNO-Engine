@@ -59,7 +59,6 @@ public class Deck {
         draw.add(new WildDrawFourCard());
         draw.add(new WildDrawFourCard());
 
-        System.out.println("Testing");
 
         discard.addAll(draw);
         draw.clear();
